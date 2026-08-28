@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>김초나 리그 오브 레전드 정보</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 18px; background: #f4f6f7; font-family: Arial, "Malgun Gothic", sans-serif; }
+    .profile { width: min(100%, 540px); overflow: hidden; border: 2px solid #1c313e; border-radius: 12px; background: #fff; box-shadow: 3px 3px 0 rgba(0,0,0,.16); }
+    .top { height: 32px; display: grid; place-items: center; background: #234658; color: #efc75d; font-size: 18px; font-weight: 700; }
+    .top::before { content: "◖◗"; letter-spacing: 2px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { height: 48px; border-top: 1px solid #cfd4d7; }
+    th { width: 31%; background: #234658; color: #ffe066; border-right: 2px solid #16323f; font-size: 16px; text-align: center; text-shadow: 1px 1px 0 #000; }
+    td { padding: 7px 12px; color: #17242c; font-size: 15px; }
+    a { color: #007f19; font-weight: 700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .image-cell { height: 58px; }
+    .position { width: 92px; height: 40px; display: block; object-fit: cover; object-position: center; border-radius: 4px; background: #050505; }
+    .tier { width: 190px; max-width: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <section class="profile" aria-label="김초나 리그 오브 레전드 정보">
+    <div class="top" aria-hidden="true"></div>
+    <table>
+      <tbody>
+        <tr>
+          <th scope="row">닉네임</th>
+          <td><a href="https://op.gg/ko/lol/summoners/kr/Re%20%EC%A0%9C%EB%A1%9C%EB%B6%80%ED%84%B0%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94%EB%8B%A4%EC%9D%B4%EC%95%84%EC%83%9D%ED%99%9C-%ED%83%91%EB%A0%88%EB%A7%88%EC%8A%A4%ED%84%B0" target="_blank" rel="noopener">Re 제로부터시작하는다이아생활#탑레마스터</a></td>
+        </tr>
+        <tr>
+          <th scope="row">포지션</th>
+          <td class="image-cell"><img class="position" src="lol-position.png" alt="미드 포지션" /></td>
+        </tr>
+        <tr>
+          <th scope="row">최고 티어</th>
+          <td class="image-cell"><img class="tier" src="lol-peak-tier.png" alt="마스터 75 LP" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>

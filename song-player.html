@@ -21,11 +21,14 @@
     iframe { display: block; width: 100%; height: 100%; border: 0; }
     h1 { margin: 20px 0 3px; color: #fff; font-size: clamp(18px,4.5vw,23px); line-height: 1.22; text-shadow: 1px 2px 0 #000; }
     .artist { margin: 0; color: #fff; font-size: 16px; font-weight: 700; }
-    .progress { margin-top: 13px; height: 5px; border-radius: 3px; background: #f1f0f4; overflow: hidden; }
+    .progress-head { display: flex; justify-content: space-between; align-items: center; margin-top: 13px; color: #fff; }
+    .progress-head svg { width: 14px; height: 14px; fill: currentColor; }
+    .progress { margin-top: 5px; height: 5px; border-radius: 3px; background: #f1f0f4; overflow: hidden; }
     .progress::before { content: ""; display: block; width: 12%; height: 100%; background: #ff5a88; }
     .times { display: flex; justify-content: space-between; margin-top: 4px; color: #fff; font-size: 11px; font-weight: 700; }
-    .buttons { display: flex; justify-content: center; gap: 23px; margin-top: 12px; color: #fff; font-size: 24px; line-height: 1; }
-    .buttons span { display: inline-grid; place-items: center; min-width: 22px; }
+    .buttons { display: flex; justify-content: center; gap: 22px; margin-top: 11px; color: #fff; }
+    .buttons svg { width: 22px; height: 22px; fill: currentColor; stroke: currentColor; stroke-width: 2; }
+    .buttons .pause { fill: currentColor; stroke: none; }
     @media (max-width: 420px) { .content { padding: 18px 20px 15px; } .tabs { gap: 10px; } .tab { min-width: 58px; padding-inline: 8px; } }
   </style>
 </head>
@@ -38,14 +41,25 @@
     </nav>
     <section class="window" aria-live="polite">
       <div class="titlebar"><span id="window-title">김초나 - 꿈빛파티시엘</span><span class="controls">− □ ×</span></div>
-      <div class="address">‹　›　↻　⌂　<strong>★</strong> https://youtube.com　⌁</div>
+      <div class="address">‹　›　↻　⌂　<strong>★</strong> https://kimchona.com　⌁</div>
       <div class="content">
         <div class="video"><iframe id="video" title="김초나 - 꿈빛파티시엘" src="https://www.youtube-nocookie.com/embed/C_jxR5xMa8U?rel=0" allowfullscreen></iframe></div>
         <h1 id="song-title">김초나 - 꿈빛파티시엘</h1>
         <p class="artist">kimchona</p>
+        <div class="progress-head" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 4h3v4h4v3h3v-3h4l-3-3 3-3h-4v3h-3V2h-3v3H7V2H4zM4 14h3v4h4v3h3v-3h3v3h3l-3 3 3 3h-3v-3h-3v3h-3v-3H7v3H4z" transform="scale(.8) translate(3 1)"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 21S3 15.4 3 8.8C3 6 5 4 7.8 4c1.7 0 3.3.9 4.2 2.2C12.9 4.9 14.5 4 16.2 4 19 4 21 6 21 8.8 21 15.4 12 21 12 21z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4zM16 9a5 5 0 010 6M18.5 6.5a8.5 8.5 0 010 11" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <div class="progress" aria-hidden="true"></div>
         <div class="times"><span>0:11</span><span>1:58</span></div>
-        <div class="buttons" aria-hidden="true"><span>↻</span><span>◀</span><span>Ⅱ</span><span>▶</span><span>⌁</span></div>
+        <div class="buttons" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 3v5h-5M7 21v-5h5" fill="none" stroke-linecap="round"/><path d="M7 8a7 7 0 0111.3-2.5L17 8M17 16A7 7 0 015.7 18.5L7 16" fill="none" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M6 5v14M18 5L9 12l9 7z"/></svg>
+          <svg class="pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M18 5v14M6 5l9 7-9 7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M17 3v5h-5M7 21v-5h5" fill="none" stroke-linecap="round"/><path d="M7 8a7 7 0 0111.3-2.5L17 8M17 16A7 7 0 015.7 18.5L7 16" fill="none" stroke-linecap="round"/></svg>
+        </div>
       </div>
     </section>
   </main>

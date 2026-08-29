@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>김초나 노래</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; padding: 20px; display: grid; place-items: center; background: #fff; font-family: Arial, "Malgun Gothic", sans-serif; }
+    .wrap { width: min(100%, 500px); }
+    .tabs { display: flex; justify-content: center; gap: 30px; margin-bottom: 14px; }
+    .tab { min-width: 66px; padding: 8px 12px; border: 2px solid #313131; border-radius: 11px; background: linear-gradient(#fff,#e8e8e8); box-shadow: inset 0 0 0 2px #fff, 0 1px 2px rgba(0,0,0,.35); color: #111; font-size: 16px; font-weight: 800; cursor: pointer; }
+    .tab[aria-selected="true"] { color: #007c88; outline: 2px solid #b7dfe0; }
+    .window { overflow: hidden; border: 2px solid #9ca5ad; border-radius: 4px; box-shadow: 1px 2px 2px rgba(0,0,0,.32); background: #1e1f3b; }
+    .titlebar { height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #e8edf2; color: #0d1421; font: 12px Georgia, serif; }
+    .controls { color: #3d4253; font: 16px Arial, sans-serif; letter-spacing: 7px; }
+    .address { height: 22px; display: flex; align-items: center; gap: 7px; padding: 0 9px; background: #f9fafc; color: #1c1c25; font-size: 11px; }
+    .address strong { color: #ff9f00; }
+    .content { padding: 24px 34px 18px; }
+    .video { aspect-ratio: 16 / 9; overflow: hidden; border: 2px solid #fff; border-radius: 6px; background: #111; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; }
+    h1 { margin: 20px 0 3px; color: #fff; font-size: clamp(18px,4.5vw,23px); line-height: 1.22; text-shadow: 1px 2px 0 #000; }
+    .artist { margin: 0; color: #fff; font-size: 16px; font-weight: 700; }
+    .progress { margin-top: 13px; height: 5px; border-radius: 3px; background: #f1f0f4; overflow: hidden; }
+    .progress::before { content: ""; display: block; width: 12%; height: 100%; background: #ff5a88; }
+    .times { display: flex; justify-content: space-between; margin-top: 4px; color: #fff; font-size: 11px; font-weight: 700; }
+    .buttons { display: flex; justify-content: center; gap: 23px; margin-top: 12px; color: #fff; font-size: 24px; line-height: 1; }
+    .buttons span { display: inline-grid; place-items: center; min-width: 22px; }
+    @media (max-width: 420px) { .content { padding: 18px 20px 15px; } .tabs { gap: 10px; } .tab { min-width: 58px; padding-inline: 8px; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="tabs" aria-label="노래 종류">
+      <button class="tab" type="button" data-key="ost" aria-selected="true">OST</button>
+      <button class="tab" type="button" data-key="ballad" aria-selected="false">발라드</button>
+      <button class="tab" type="button" data-key="rock" aria-selected="false">록</button>
+    </nav>
+    <section class="window" aria-live="polite">
+      <div class="titlebar"><span id="window-title">김초나 - 꿈빛파티시엘</span><span class="controls">− □ ×</span></div>
+      <div class="address">‹　›　↻　⌂　<strong>★</strong> https://youtube.com　⌁</div>
+      <div class="content">
+        <div class="video"><iframe id="video" title="김초나 - 꿈빛파티시엘" src="https://www.youtube-nocookie.com/embed/C_jxR5xMa8U?rel=0" allowfullscreen></iframe></div>
+        <h1 id="song-title">김초나 - 꿈빛파티시엘</h1>
+        <p class="artist">kimchona</p>
+        <div class="progress" aria-hidden="true"></div>
+        <div class="times"><span>0:11</span><span>1:58</span></div>
+        <div class="buttons" aria-hidden="true"><span>↻</span><span>◀</span><span>Ⅱ</span><span>▶</span><span>⌁</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const songs = {
+      ost: { title: '김초나 - 꿈빛파티시엘', video: 'C_jxR5xMa8U' },
+      ballad: { title: '김초나 - 가시', video: 'jKD9trQt10g' },
+      rock: { title: '김초나 - 외톨이야', video: 'HbKGhwWaN6k' }
+    };
+    const tabs = document.querySelectorAll('.tab');
+    const video = document.querySelector('#video');
+    const songTitle = document.querySelector('#song-title');
+    const windowTitle = document.querySelector('#window-title');
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      const song = songs[tab.dataset.key];
+      tabs.forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+      video.src = `https://www.youtube-nocookie.com/embed/${song.video}?rel=0`;
+      video.title = song.title;
+      songTitle.textContent = song.title;
+      windowTitle.textContent = song.title;
+    }));
+  </script>
+</body>
+</html>

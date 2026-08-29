@@ -11,7 +11,7 @@
     .tabs { display: flex; justify-content: center; gap: 30px; margin-bottom: 14px; }
     .tab { min-width: 66px; padding: 8px 12px; border: 2px solid #313131; border-radius: 11px; background: linear-gradient(#fff,#e8e8e8); box-shadow: inset 0 0 0 2px #fff, 0 1px 2px rgba(0,0,0,.35); color: #111; font-size: 16px; font-weight: 800; cursor: pointer; }
     .tab[aria-selected="true"] { color: #007c88; outline: 2px solid #b7dfe0; }
-    .window { overflow: hidden; border: 2px solid #9ca5ad; border-radius: 4px; box-shadow: 1px 2px 2px rgba(0,0,0,.32); background: #1e1f3b; }
+    .window { overflow: hidden; border: 2px solid #9ca5ad; border-radius: 4px; box-shadow: 1px 2px 2px rgba(0,0,0,.18); background: #f4f6f6; }
     .titlebar { height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; background: #e8edf2; color: #0d1421; font: 12px Georgia, serif; }
     .controls { color: #3d4253; font: 16px Arial, sans-serif; letter-spacing: 7px; }
     .address { height: 22px; display: flex; align-items: center; gap: 7px; padding: 0 9px; background: #f9fafc; color: #1c1c25; font-size: 11px; }
@@ -19,14 +19,14 @@
     .content { padding: 24px 34px 18px; }
     .video { aspect-ratio: 16 / 9; overflow: hidden; border: 2px solid #fff; border-radius: 6px; background: #111; }
     iframe { display: block; width: 100%; height: 100%; border: 0; }
-    h1 { margin: 20px 0 3px; color: #fff; font-size: clamp(18px,4.5vw,23px); line-height: 1.22; text-shadow: 1px 2px 0 #000; }
-    .artist { margin: 0; color: #fff; font-size: 16px; font-weight: 700; }
-    .heart { margin: 13px 0 4px; color: #fff; text-align: center; font-size: 17px; }
-    .progress-line { display: grid; grid-template-columns: 36px 1fr 36px; align-items: center; gap: 8px; color: #fff; font-size: 11px; font-weight: 700; }
-    .track { position: relative; height: 4px; border-radius: 3px; background: #f1f0f4; }
+    h1 { margin: 20px 0 3px; color: #202235; font-size: clamp(18px,4.5vw,23px); line-height: 1.22; }
+    .artist { margin: 0; color: #202235; font-size: 16px; font-weight: 700; }
+    .heart { margin: 13px 0 4px; color: #202235; text-align: center; font-size: 17px; }
+    .progress-line { display: grid; grid-template-columns: 36px 1fr 36px; align-items: center; gap: 8px; color: #202235; font-size: 11px; font-weight: 700; }
+    .track { position: relative; height: 4px; border-radius: 3px; background: #c8ccce; }
     .track::before { content: ""; display: block; width: var(--played, 15%); height: 100%; border-radius: inherit; background: #ff5a88; }
     .track::after { content: "●"; position: absolute; left: calc(var(--played, 15%) - 5px); top: 50%; color: #fff; font-size: 13px; line-height: 1; transform: translateY(-51%); text-shadow: 0 0 1px #1e1f3b; }
-    .buttons { display: grid; grid-template-columns: 1fr repeat(3, 52px) 1fr; align-items: center; margin-top: 12px; color: #fff; font-size: 24px; font-weight: 700; line-height: 1; }
+    .buttons { display: grid; grid-template-columns: 1fr repeat(3, 52px) 1fr; align-items: center; margin-top: 12px; color: #202235; font-size: 24px; font-weight: 700; line-height: 1; }
     .buttons span { text-align: center; }
     .buttons .shuffle { text-align: left; font-size: 19px; }
     .buttons .repeat { text-align: right; font-size: 19px; }

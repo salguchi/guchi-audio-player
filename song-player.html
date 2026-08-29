@@ -26,7 +26,7 @@
     .track { position: relative; height: 4px; border-radius: 3px; background: #f1f0f4; }
     .track::before { content: ""; display: block; width: var(--played, 15%); height: 100%; border-radius: inherit; background: #ff5a88; }
     .track::after { content: "●"; position: absolute; left: calc(var(--played, 15%) - 5px); top: 50%; color: #fff; font-size: 13px; line-height: 1; transform: translateY(-51%); text-shadow: 0 0 1px #1e1f3b; }
-    .buttons { display: grid; grid-template-columns: 1fr repeat(3, auto) 1fr; align-items: center; margin-top: 12px; color: #fff; font-size: 24px; font-weight: 700; line-height: 1; }
+    .buttons { display: grid; grid-template-columns: 1fr repeat(3, 52px) 1fr; align-items: center; margin-top: 12px; color: #fff; font-size: 24px; font-weight: 700; line-height: 1; }
     .buttons span { text-align: center; }
     .buttons .shuffle { text-align: left; font-size: 19px; }
     .buttons .repeat { text-align: right; font-size: 19px; }
@@ -47,7 +47,7 @@
         <div class="video"><iframe id="video" title="김초나 - 꿈빛파티시엘" src="https://www.youtube-nocookie.com/embed/C_jxR5xMa8U?rel=0" allowfullscreen></iframe></div>
         <h1 id="song-title">김초나 - 꿈빛파티시엘</h1>
         <p class="artist">kimchona</p>
-        <div class="heart" aria-hidden="true">♥</div>
+        <div class="heart" aria-hidden="true">🤍</div>
         <div class="progress-line" aria-label="재생 진행 상태"><span id="elapsed">0:29</span><div class="track" id="track" style="--played: 15%"></div><span id="duration">3:17</span></div>
         <div class="buttons" aria-hidden="true"><span class="shuffle">⇆</span><span>◀</span><span>❚❚</span><span>▶</span><span class="repeat">↻</span></div>
       </div>

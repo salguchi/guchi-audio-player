@@ -1,4 +1,4 @@
-name: Update LoL highest rank
+name: Update LoL current rank
 
 on:
   schedule:
@@ -9,7 +9,7 @@ on:
     paths:
       - '.github/workflows/update-lol-rank.yml'
       - 'scripts/*.mjs'
-      - 'lol-rank-client.js'
+      - 'lol-current-rank-client.js'
 
 permissions:
   contents: write
@@ -29,16 +29,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Test highest-rank extraction
+      - name: Test current-rank extraction
         run: node --test scripts/*.test.mjs
-      - name: Fetch OP.GG displayed Solo/Duo peak
+      - name: Fetch OP.GG displayed Solo/Duo current rank
         run: node scripts/update-lol-rank.mjs
       - name: Save verified snapshot
         run: |
-          if git diff --quiet -- lol-rank.json; then exit 0; fi
+          git add -- lol-current-rank.json
+          if git diff --cached --quiet -- lol-current-rank.json; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- lol-rank.json
-          git commit -m 'Update OP.GG highest rank snapshot'
+          git commit -m 'Update OP.GG current rank snapshot'
           git pull --rebase origin main
           git push origin HEAD:main

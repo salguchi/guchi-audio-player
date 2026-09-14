@@ -6,6 +6,7 @@
   const label = document.getElementById('current-rank');
   const icon = document.getElementById('current-icon');
   const status = document.getElementById('rank-status');
+  const record = document.getElementById('current-record');
   let lastChecked = Date.parse(status.dataset.checkedAt);
   let displayedTier = 'MASTER';
   let loading = false;
@@ -33,10 +34,22 @@
       if (data.schemaVersion !== 1 || data.riotId !== expectedId || data.queue !== 'RANKED_SOLO_5x5' || data.scope !== 'opgg-displayed-solo-current' || (!ranked && !unranked) || !Number.isFinite(checked) || checked > Date.now() + 300000) {
         throw new Error('Invalid current-rank snapshot');
       }
+      // Accept the old rank-only format during deployment, never partial stats.
+      const hasStats = ['wins', 'losses', 'winRate'].some((key) => Object.hasOwn(data, key));
+      const games = data.wins + data.losses;
+      const validStats = unranked
+        ? data.wins === null && data.losses === null && data.winRate === null
+        : [data.wins, data.losses].every((n) => Number.isInteger(n) && n >= 0 && n <= 100000)
+          && Number.isFinite(data.winRate) && data.winRate >= 0 && data.winRate <= 100
+          && (games === 0 ? data.winRate === 0 : Math.abs(data.winRate - data.wins / games * 100) <= 1);
+      if (hasStats && !validStats) throw new Error('Invalid current Solo/Duo record');
       // Timestamp ordering prevents stale responses, but lower LP is a valid update.
       if (checked >= lastChecked || !Number.isFinite(lastChecked)) {
         const tierName = unranked ? '언랭크' : tiers[data.tier] + (data.division ? ' ' + data.division : '');
         label.textContent = unranked ? tierName : tierName + ' ' + data.lp + 'LP';
+        if (record) record.textContent = unranked ? '승패·승률 정보 없음'
+          : hasStats ? data.wins + '승 ' + data.losses + '패 · 승률 ' + data.winRate + '%'
+          : '승패·승률 확인 중';
         if (displayedTier !== data.tier) {
           icon.hidden = unranked;
           icon.style.display = unranked ? 'none' : '';

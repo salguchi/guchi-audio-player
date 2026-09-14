@@ -42,7 +42,7 @@ export function parseCurrentRank(html, now = new Date()) {
     source: SOURCE_URL,
   };
   if (/^(언랭크|Unranked)$/i.test(rankLabel)) {
-    return { ...base, status: 'unranked', tier: 'UNRANKED', division: null, rankLabel: '언랭크', lp: null };
+    return { ...base, status: 'unranked', tier: 'UNRANKED', division: null, rankLabel: '언랭크', lp: null, wins: null, losses: null, winRate: null };
   }
   const points = section.slice(current.index + current[0].length).match(
     /^\s*<span\b[^>]*>\s*(\d{1,3}(?:,\d{3})+|\d+)\s*LP\s*<\/span>/,
@@ -54,6 +54,21 @@ export function parseCurrentRank(html, now = new Date()) {
   const tier = TIERS[rank[1]];
   const apex = ['MASTER', 'GRANDMASTER', 'CHALLENGER'].includes(tier);
   if (apex === Boolean(rank[2])) throw new Error('Invalid tier division.');
+  // The two stats spans must immediately follow this current-rank block.
+  // Never pick recent-match summaries, the peak row, or Flex queue records.
+  const record = section.slice(current.index + current[0].length + points[0].length).match(
+    /^(?:\s*<\/div>){2}\s*<div\b[^>]*>\s*<span\b[^>]*>\s*(\d{1,3}(?:,\d{3})+|\d+)\s*승\s*(\d{1,3}(?:,\d{3})+|\d+)\s*패\s*<\/span>\s*<span\b[^>]*>\s*승률\s*(\d+(?:\.\d+)?)\s*%\s*<\/span>\s*<\/div>/,
+  );
+  if (!record) throw new Error('Current Solo/Duo wins, losses, or win rate is missing.');
+  const wins = Number(record[1].replaceAll(',', ''));
+  const losses = Number(record[2].replaceAll(',', ''));
+  const winRate = Number(record[3]);
+  const games = wins + losses;
+  if (![wins, losses].every((n) => Number.isInteger(n) && n >= 0 && n <= 100000)
+      || !Number.isFinite(winRate) || winRate < 0 || winRate > 100
+      || (games === 0 ? winRate !== 0 : Math.abs(winRate - wins / games * 100) > 1)) {
+    throw new Error('Invalid or inconsistent current Solo/Duo record.');
+  }
   return {
     ...base,
     status: 'ranked',
@@ -61,6 +76,9 @@ export function parseCurrentRank(html, now = new Date()) {
     division: rank[2] || null,
     rankLabel,
     lp,
+    wins,
+    losses,
+    winRate,
   };
 }
 

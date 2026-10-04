@@ -118,3 +118,13 @@ test('failed HTTP, content type, validation, or network leaves snapshot unchange
     assert.deepEqual([saved.wins, saved.losses, saved.winRate], [126, 125, 50]);
   } finally { await rm(dir, {recursive:true}); }
 });
+test('accepts renamed Solo/Duo heading and rejects lookalike or duplicate sections', () => {
+  const html = fixture({tier: '다이아몬드 1', current: 75, peak: 137, record: {wins:130, losses:127, winRate:51}})
+    .replace('개인/2인 랭크 게임', '개인/2인 랭크');
+  const r = parseCurrentRank(html, date);
+  assert.deepEqual([r.tier, r.division, r.lp, r.wins, r.losses, r.winRate], ['DIAMOND', '1', 75, 130, 127, 51]);
+  for (const heading of ['자유 랭크', '개인/2인 랭크 기록', '개인/2인 랭크 게임 기록']) {
+    assert.throws(() => parseCurrentRank(html.replace('개인/2인 랭크', heading)));
+  }
+  assert.throws(() => parseCurrentRank(html + '<section><span>개인/2인 랭크 게임</span></section>'));
+});

@@ -23,7 +23,7 @@ export function parseCurrentRank(html, now = new Date()) {
     throw new Error('Expected OP.GG profile was not found. Keeping the saved rank.');
   }
   const sections = [...markup.matchAll(/<section\b[^>]*>([\s\S]*?)<\/section>/gi)]
-    .map((m) => m[1]).filter((s) => /<span\b[^>]*>\s*개인\/2인 랭크 게임\s*<\/span>/.test(s));
+    .map((m) => m[1]).filter((s) => /<span\b[^>]*>\s*개인\/2인 랭크(?:\s+게임)?\s*<\/span>/.test(s));
   if (sections.length !== 1) throw new Error('Solo/Duo section is missing or ambiguous.');
   const section = sections[0].split(/<table\b/i)[0];
   // OP.GG's large primary rank is text-xl. The smaller peak row is text-sm.
